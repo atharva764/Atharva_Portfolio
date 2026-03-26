@@ -143,39 +143,37 @@
   <!-- JS FILES -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- ✅ UPDATED JS FOR LIVE BACKEND -->
-  <script>
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+<!-- ✅ UPDATED JS FOR LIVE BACKEND -->
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const name = document.getElementById("name-field").value;
-      const email = document.getElementById("email-field").value;
-      const subject = document.getElementById("subject-field").value;
-      const message = document.getElementById("message-field").value;
+    const name = document.getElementById("name-field").value;
+    const email = document.getElementById("email-field").value;
+    const subject = document.getElementById("subject-field").value;
+    const message = document.getElementById("message-field").value;
 
-      fetch("https://portfolioapi-4-7wby.onrender.com/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          subject: subject,
-          message: message
-        })
+    fetch("https://portfolioapi-5.onrender.com/api/contact", {   // <-- updated URL
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        subject: subject,
+        message: message
       })
-        .then(res => res.json())
-        .then(data => {
-          alert("Message sent successfully!");
-          document.getElementById("contactForm").reset(); // clears the form
-        })
-        .catch(err => {
-          alert("Error sending message!");
-          console.error(err);
-        });
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Message sent successfully!");
+      // Optional: clear form fields after submission
+      document.getElementById("contactForm").reset();
+    })
+    .catch(err => {
+      alert("Error sending message!");
+      console.error(err);
     });
-  </script>
-
-</body>
-</html>
+  });
+</script>
