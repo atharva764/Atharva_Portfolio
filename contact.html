@@ -145,7 +145,7 @@
 
 <!-- ✅ UPDATED JS FOR LIVE BACKEND -->
 <script>
-  document.getElementById("contactForm").addEventListener("submit", function (e) {
+document.getElementById("contactForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const name = document.getElementById("name-field").value;
@@ -153,27 +153,30 @@
     const subject = document.getElementById("subject-field").value;
     const message = document.getElementById("message-field").value;
 
-    fetch("https://portfolioapi-5.onrender.com/api/contact", {   // <-- updated URL
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        subject: subject,
-        message: message
-      })
+    fetch("https://portfolioapi-6.onrender.com/api/contact", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+        })
     })
-    .then(res => res.json())
+    .then(res => {
+        if(res.ok) return res.json();
+        throw new Error("Network response was not ok.");
+    })
     .then(data => {
-      alert("Message sent successfully!");
-      // Optional: clear form fields after submission
-      document.getElementById("contactForm").reset();
+        alert("Message sent successfully!");
+        // Clear the form after successful submission
+        document.getElementById("contactForm").reset();
     })
     .catch(err => {
-      alert("Error sending message!");
-      console.error(err);
+        console.error(err);
+        alert("Error sending message!");
     });
-  });
+});
 </script>
